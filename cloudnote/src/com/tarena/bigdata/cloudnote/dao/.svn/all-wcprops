@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/SYSTEM/!svn/ver/5868/TTS7.0/code/trunk/TTS7/cloudnote/src/test/java/com/tarena/bigdata/cloudnote/dao
+END
+NoteMybatisDaoTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/SYSTEM/!svn/ver/5868/TTS7.0/code/trunk/TTS7/cloudnote/src/test/java/com/tarena/bigdata/cloudnote/dao/NoteMybatisDaoTest.java
+END
+ActivityMybatisDaoTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/SYSTEM/!svn/ver/5868/TTS7.0/code/trunk/TTS7/cloudnote/src/test/java/com/tarena/bigdata/cloudnote/dao/ActivityMybatisDaoTest.java
+END
+UserMybatisDaoTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/SYSTEM/!svn/ver/5739/TTS7.0/code/trunk/TTS7/cloudnote/src/test/java/com/tarena/bigdata/cloudnote/dao/UserMybatisDaoTest.java
+END
+NoteBookMybatisDaoTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/SYSTEM/!svn/ver/5783/TTS7.0/code/trunk/TTS7/cloudnote/src/test/java/com/tarena/bigdata/cloudnote/dao/NoteBookMybatisDaoTest.java
+END

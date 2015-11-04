@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/SYSTEM/!svn/ver/5857/TTS7.0/code/trunk/TTS7/cloudnote/src/main/resources/mybatis
+END
+ActivityMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/SYSTEM/!svn/ver/5857/TTS7.0/code/trunk/TTS7/cloudnote/src/main/resources/mybatis/ActivityMapper.xml
+END
+UserMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/SYSTEM/!svn/ver/5218/TTS7.0/code/trunk/TTS7/cloudnote/src/main/resources/mybatis/UserMapper.xml
+END
+NotebookMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/SYSTEM/!svn/ver/6131/TTS7.0/code/trunk/TTS7/cloudnote/src/main/resources/mybatis/NotebookMapper.xml
+END
+NoteMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/SYSTEM/!svn/ver/5628/TTS7.0/code/trunk/TTS7/cloudnote/src/main/resources/mybatis/NoteMapper.xml
+END

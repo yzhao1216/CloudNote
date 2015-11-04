@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tarena.bigdata.cloudnote.dao.NoteMybatisDao">
+	<!--获取指定用户的指定笔记本的笔记列表，只获取id和name -->
+	<select id="getNormalNoteListById" parameterType="String"
+		resultType="com.tarena.bigdata.cloudnote.entity.Note">
+		SELECT cn.cn_note_id AS cnNoteId,
+		cn.cn_note_title AS	cnNoteTitle
+		FROM cn_note cn WHERE cn.cn_notebook_id=#{notebookId}
+		order by cn_note_title
+	</select>
+	<!--获取指定用户的指定笔记本的笔记列表，只获取id和name -->
+	<select id="getNormalNoteListByCode" parameterType="String"
+		resultType="com.tarena.bigdata.cloudnote.entity.Note">
+		SELECT cn.cn_note_id AS cnNoteId,
+		cn.cn_note_title AS	cnNoteTitle
+		FROM cn_note cn 
+		JOIN cn_notebook cnb ON cn.cn_notebook_id = cnb.cn_notebook_id
+		JOIN cn_notebook_type cnt ON cnb.cn_notebook_type_id=cnt.cn_notebook_type_id
+		WHERE cnt.cn_notebook_type_code=#{cnNotebookTypeCode}
+	</select>
+	<!--在指定用户的指定笔记本的下创建一个新笔记 -->
+	<insert id="createNormalNote" parameterType="com.tarena.bigdata.cloudnote.entity.Note">
+		INSERT INTO
+		`cloud_note`.`cn_note`
+		(`cn_note_id`,
+		`cn_notebook_id`,
+		`cn_user_id`,
+		`cn_note_status_id`,
+		`cn_note_type_id`,
+		`cn_note_title`,
+		`cn_note_body`,
+		`cn_note_create_time`,
+		`cn_note_last_modify_time`
+		)
+		VALUES
+		( #{cnNoteId},
+		#{cnNotebookId},
+		#{cnUserId},
+		#{cnNoteStatusId},
+		#{cnNoteTypeId},
+		#{cnNoteTitle},
+		#{cnNoteBody},
+		#{cnNoteCreateTime},
+		#{cnNoteLastModifyTime}
+		);
+   </insert>
+	<!--修改指定用户的指定笔记 -->
+	<update id="updateNormalNote" parameterType="com.tarena.bigdata.cloudnote.entity.Note">
+		UPDATE
+		`cloud_note`.`cn_note`
+		SET
+		`cn_notebook_id` = #{cnNotebookId} ,
+		`cn_user_id` = #{cnUserId} ,
+		`cn_note_status_id` = #{cnNoteStatusId} ,
+		`cn_note_type_id` = #{cnNoteTypeId} ,
+		`cn_note_title` = #{cnNoteTitle}
+		,
+		`cn_note_body` = #{cnNoteBody} ,
+		`cn_note_create_time` =
+		#{cnNoteCreateTime} ,
+		`cn_note_last_modify_time` =
+		#{cnNoteLastModifyTime}
+		WHERE
+		`cn_note_id` = #{cnNoteId} 
+	</update>
+	<!--删除指定用户的指定笔记,进回收站 -->
+	<update id="moveNoteToOtherNotebook" parameterType="map">
+		UPDATE
+		`cloud_note`.`cn_note`
+		SET
+		`cn_notebook_id` = #{cnNotebookId}
+		WHERE
+		`cn_note_id` = #{cnNoteId} 
+	</update>
+	<!--彻底删除指定用户中回收站的指定笔记 -->
+	<delete id="deleteNormalNote" parameterType="String">
+		DELETE FROM
+		`cloud_note`.`cn_note`
+		WHERE
+		`cn_note_id` = #{noteId} 
+   </delete>
+	<!--获取笔记本详情 -->
+	<select id="getNoteDetail" parameterType="String"
+		resultType="com.tarena.bigdata.cloudnote.entity.Note">
+		SELECT cn.cn_note_id AS cnNoteId,
+		cn.cn_notebook_id AS
+		cnNotebookId,
+		cn.cn_user_id AS cnUserId,
+		cn.cn_note_status_id AS
+		cnNoteStatusId,
+		cn.cn_note_type_id AS cnNoteTypeId,
+		cn.cn_note_title AS
+		cnNoteTitle,
+		cn.cn_note_body AS cnNoteBody,
+		cn.cn_note_create_time AS
+		cnNoteCreateTime,
+		cn.cn_note_last_modify_time AS cnNoteLastModifyTime
+		FROM cn_note cn WHERE cn.cn_note_id=#{noteId}
+	</select>
+	<!--将指定用户、指定笔记进行共享 -->
+	<insert id="shareNote" parameterType="com.tarena.bigdata.cloudnote.entity.Share">
+		INSERT INTO
+		`cloud_note`.`cn_share`
+		(`cn_share_id`,
+		`cn_share_title`,
+		`cn_share_body`,
+		`cn_note_id`
+		)
+		VALUES
+		(#{cnShareId},
+		#{cnShareTitle},
+		#{cnShareBody},
+		#{cnNoteId}
+		)
+	</insert>
+	<!--将查询所有共享笔记 -->
+	<select id="searchShareNote" parameterType="map"
+		resultType="com.tarena.bigdata.cloudnote.entity.Share">
+		SELECT `cn_share_id` AS cnShareId,
+		`cn_share_title` AS cnShareTitle,
+		`cn_share_body` AS cnShareBody,
+		`cn_note_id` AS cnNoteId
+		FROM 
+		`cloud_note`.`cn_share`
+		WHERE cn_share_title like CONCAT('%',#{key},'%')
+		LIMIT #{start}, #{limit}
+	</select>
+	<!--获取笔记本详情 -->
+	<select id="getShareNoteDetail" parameterType="String"
+		resultType="com.tarena.bigdata.cloudnote.entity.Share">
+		SELECT `cn_share_id` AS cnShareId,
+		`cn_share_title` AS cnShareTitle,
+		`cn_share_body` AS cnShareBody,
+		`cn_note_id` AS cnNoteId
+		FROM 
+		`cloud_note`.`cn_share`
+		WHERE cn_share_id =#{shareNoteId}
+	</select>
+	
+	
+	<!--获取活动笔记本详情 -->
+	<select id="getNoteActivityDetail" parameterType="String"
+		resultType="com.tarena.bigdata.cloudnote.entity.NoteActivity">
+		SELECT `cn_note_activity_id` AS cnNoteActivityId,
+		`cn_activity_id` AS cnActivityId,
+		`cn_note_id` AS cnNoteId,
+		`cn_note_activity_title` as cnNoteActivityTitle,
+		`cn_note_activity_body` as cnNoteActivityBody 
+		FROM 
+		`cloud_note`.`cn_note_activity`
+		WHERE cn_note_activity_id = #{activityNoteId}
+	</select>
+	
+</mapper>

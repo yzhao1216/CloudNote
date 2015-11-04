@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tarena.bigdata.cloudnote.dao.NotebookMybatisDao">
+	<!--获取指定用户的笔记本列表 -->
+	<select id="getNotebookList" parameterType="map"
+		resultType="com.tarena.bigdata.cloudnote.entity.Notebook">
+		SELECT cnb.cn_notebook_id AS cnNotebookId,
+		cnb.cn_user_id AS
+		cnUserId,
+		cnb.cn_notebook_type_id AS cnNotebookTypeId,
+		cnb.cn_notebook_name AS cnNotebookName,
+		cnb.cn_notebook_desc AS
+		cnNotebookDesc
+		FROM
+		cn_notebook cnb
+		JOIN cn_notebook_type cnt ON
+		cnb.cn_notebook_type_id=cnt.cn_notebook_type_id
+		WHERE cnb.cn_user_id =
+		#{cnUserId} AND
+		cnt.cn_notebook_type_code=#{cnNotebookTypeCode}
+		order by cnb.cn_notebook_createtime desc
+	</select>
+	<!--增加一个指定用户的笔记本 -->
+	<insert id="createNoteBook" parameterType="com.tarena.bigdata.cloudnote.entity.Notebook">
+		INSERT INTO
+		`cloud_note`.`cn_notebook`
+		(`cn_notebook_id`,
+		`cn_user_id`,
+		`cn_notebook_type_id`,
+		`cn_notebook_name`,
+		`cn_notebook_desc`,
+		`cn_notebook_createtime`
+		)
+		VALUES
+		(#{cnNotebookId},
+		#{cnUserId},
+		#{cnNotebookTypeId},
+		#{cnNotebookName},
+		#{cnNotebookDesc},
+		#{cnNotebookCreatetime}
+		)
+   </insert>
+	<!--修改一个指定用户的笔记本(只能修改笔记本的名字) -->
+	<update id="updateNoteBook" parameterType="com.tarena.bigdata.cloudnote.entity.Notebook">
+		UPDATE
+		`cloud_note`.`cn_notebook`
+		SET
+		`cn_user_id` = #{cnUserId} ,
+		`cn_notebook_type_id` = #{cnNotebookTypeId} ,
+		`cn_notebook_name` =
+		#{cnNotebookName} ,
+		`cn_notebook_desc` = #{cnNotebookDesc}
+		WHERE
+		`cn_notebook_id` = #{cnNotebookId} ;
+	</update>
+	<!--删除一个指定用户的笔记本 -->
+	<delete id="deleteNoteBook" parameterType="String">
+		DELETE FROM
+		`cloud_note`.`cn_notebook`
+		WHERE
+		`cn_notebook_id` = #{cnNotebookId} ;
+	</delete>
+	<!--根据cnNotebookTypeCode查询NotebookType -->
+	<select id="getNotebookType" parameterType="String"
+		resultType="com.tarena.bigdata.cloudnote.entity.NotebookType">
+		SELECT `cn_notebook_type_id` AS cnNotebookTypeId,
+		`cn_notebook_type_code` AS cnNotebookTypeCode,
+		`cn_notebook_type_name` AS cnNotebookTypeName,
+		`cn_notebook_type_desc` AS cnUserToken
+
+		FROM
+		`cloud_note`.`cn_notebook_type` 
+		WHERE cn_notebook_type_code=#{cnNotebookTypeCode};
+	</select>
+	<!--查询NotebookTypeList -->
+	<select id="getNotebookTypeList" resultType="com.tarena.bigdata.cloudnote.entity.NotebookType">
+
+		SELECT `cn_notebook_type_id` AS cnNotebookTypeId,
+		`cn_notebook_type_code` AS cnNotebookTypeCode,
+		`cn_notebook_type_name` AS cnNotebookTypeName,
+		`cn_notebook_type_desc` AS cnUserToken
+
+		FROM
+		`cloud_note`.`cn_notebook_type` 
+	</select>
+	
+	<!--根据用户id和笔记本类型查询笔记 -->
+	<select id="getNoteBookByUIdAndTy" parameterType="string"
+		resultType="com.tarena.bigdata.cloudnote.entity.Notebook">
+		SELECT cnb.cn_notebook_id AS cnNotebookId,
+		cnb.cn_user_id AS
+		cnUserId,
+		cnb.cn_notebook_type_id AS cnNotebookTypeId,
+		cnb.cn_notebook_name AS cnNotebookName,
+		cnb.cn_notebook_desc AS
+		cnNotebookDesc
+		FROM
+		cn_notebook cnb
+		WHERE cnb.cn_user_id = #{cnUserId} 
+		AND cnb.cn_notebook_name = #{cnNotebookName}
+	</select>
+	
+	
+	
+	<!--通过id查找Notebook -->
+	<select id="getNoteBookById" parameterType="string"
+		resultType="com.tarena.bigdata.cloudnote.entity.Notebook">
+		SELECT cnb.cn_notebook_id AS cnNotebookId,
+		cnb.cn_user_id AS cnUserId,
+		cnb.cn_notebook_type_id AS cnNotebookTypeId,
+		cnb.cn_notebook_name AS cnNotebookName,
+		cnb.cn_notebook_desc AS cnNotebookDesc
+		FROM
+		cn_notebook cnb
+		WHERE cnb.cn_notebook_id = #{notebookId} 
+	</select>
+</mapper>

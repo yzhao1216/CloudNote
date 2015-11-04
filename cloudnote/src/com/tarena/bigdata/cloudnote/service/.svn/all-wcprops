@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/SYSTEM/!svn/ver/5874/TTS7.0/code/trunk/TTS7/cloudnote/src/test/java/com/tarena/bigdata/cloudnote/service
+END
+UserServiceTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/SYSTEM/!svn/ver/5776/TTS7.0/code/trunk/TTS7/cloudnote/src/test/java/com/tarena/bigdata/cloudnote/service/UserServiceTest.java
+END
+NoteBookserviceTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/SYSTEM/!svn/ver/5816/TTS7.0/code/trunk/TTS7/cloudnote/src/test/java/com/tarena/bigdata/cloudnote/service/NoteBookserviceTest.java
+END
+NoteServiceTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/SYSTEM/!svn/ver/5869/TTS7.0/code/trunk/TTS7/cloudnote/src/test/java/com/tarena/bigdata/cloudnote/service/NoteServiceTest.java
+END
+AccountServiceTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/SYSTEM/!svn/ver/5791/TTS7.0/code/trunk/TTS7/cloudnote/src/test/java/com/tarena/bigdata/cloudnote/service/AccountServiceTest.java
+END
+ActivityServiceTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/SYSTEM/!svn/ver/5874/TTS7.0/code/trunk/TTS7/cloudnote/src/test/java/com/tarena/bigdata/cloudnote/service/ActivityServiceTest.java
+END

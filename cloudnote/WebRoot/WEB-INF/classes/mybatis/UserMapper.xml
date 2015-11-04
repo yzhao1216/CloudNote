@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tarena.bigdata.cloudnote.dao.UserMybatisDao">
+
+<!-- 获取用户: 输出直接映射到对象, 列名和字段名要进行处理，如：cn_user_id列要"as cnUserId"以方便映射 -->
+	<select id="getUserByLoginNamePsd" parameterType="map"
+		resultType="com.tarena.bigdata.cloudnote.entity.User">
+		select
+		cn_user_id as cnUserId,
+		cn_user_name as cnUserName,
+		cn_user_password as cnUserPassword,
+		cn_user_token as cnUserToken,
+		cn_user_desc as cnUserDesc
+		from cn_user
+		where cn_user_name=#{cnUserName} AND
+		cn_user_password=#{cnUserPassword}
+	</select>
+	
+	
+
+	<!--将指定用户、指定笔记进行共享 -->
+	<insert id="createUser" parameterType="com.tarena.bigdata.cloudnote.entity.User">
+		INSERT INTO
+		`cloud_note`.`cn_user`
+		(`cn_user_id`,
+		`cn_user_name`,
+		`cn_user_password`,
+		`cn_user_token`,
+		`cn_user_desc`
+		)
+		VALUES
+		(#{cnUserId},
+		#{cnUserName},
+		#{cnUserPassword},
+		#{cnUserToken},
+		#{cnUserDesc}
+		);
+	</insert>
+	<!--修改指定用户的密码-->
+	<update id="updatePassword" parameterType="com.tarena.bigdata.cloudnote.entity.User">
+		UPDATE `cloud_note`.`cn_user` 
+	SET
+	`cn_user_password` = #{cnUserPassword}
+	WHERE
+	`cn_user_id` = #{cnUserId} ;
+	</update>
+	<!-- 通过用户名获取用户: 输出直接映射到对象, 列名和字段名要进行处理，如：cn_user_id列要"as cnUserId"以方便映射 -->
+	<select id="getUserByLoginName" parameterType="String"
+		resultType="com.tarena.bigdata.cloudnote.entity.User">
+		select
+		cn_user_id as cnUserId,
+		cn_user_name as cnUserName,
+		cn_user_password as cnUserPassword,
+		cn_user_token as cnUserToken,
+		cn_user_desc as cnUserDesc
+		from cn_user
+		where cn_user_name=#{cnUserName} 
+	</select>
+</mapper> 

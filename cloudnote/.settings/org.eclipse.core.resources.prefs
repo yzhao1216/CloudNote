@@ -1,0 +1,7 @@
+#Mon Sep 01 13:59:20 CST 2014
+eclipse.preferences.version=1
+encoding//src/application.development.properties=UTF-8
+encoding//src/application.production.properties=UTF-8
+encoding//src/application.test.properties=UTF-8
+encoding//src/com/tarena/bigdata/cloudnote/web=UTF-8
+encoding/<project>=UTF-8
